@@ -1,4 +1,4 @@
-import {AP, ProPAP, PAP, ParsedValueStatement, Arg, ForInstruction} from './types';
+import {AP, ProPAP, PAP, ParsedValueStatement, Arg, Instruction} from './types';
 import {ElTypes} from 'be-linked/types';
 import {RegExpOrRegExpExt} from 'be-enhanced/types';
 import {arr, tryParse} from 'be-enhanced/cpu.js';
@@ -14,7 +14,7 @@ export function prsValue(self: AP) : PAP {
     let {Value, instructions} = self;
     if(instructions === undefined) instructions = [];
     const args: Array<Arg> = [];
-    const instruction: ForInstruction = {
+    const instruction: Instruction = {
         args
     };
     instructions.push(instruction);

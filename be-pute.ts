@@ -10,7 +10,7 @@ import {setItemProp} from 'be-linked/setItemProp.js';
 import {getSignalVal} from 'be-linked/getSignalVal.js';
 import {Actions as BPActions} from 'be-propagating/types';
 
-export class BeFor extends BE<AP, Actions> implements Actions{
+export class BePute extends BE<AP, Actions> implements Actions{
     static override get beConfig(){
         return {
             parse: true,
@@ -26,8 +26,8 @@ export class BeFor extends BE<AP, Actions> implements Actions{
         return parsed as PAP;
     }
 
-    async onActions(self: this){
-        const {prsAction} = await import('./prsAction.js');
+    async onResults(self: this){
+        const {prsAction} = await import('./prsResult.js');
         const parsed = prsAction(self);
         return parsed as PAP;
     }
@@ -134,10 +134,10 @@ async function evalFormula(self: AP){
 }
 
 
-export interface BeFor extends AllProps{}
+export interface BePute extends AllProps{}
 
-const tagName = 'be-for';
-const ifWantsToBe = 'for'
+const tagName = 'be-pute';
+const ifWantsToBe = 'pute'
 const upgrade = '*';
 
 const xe = new XE<AP, Actions>({
@@ -154,7 +154,7 @@ const xe = new XE<AP, Actions>({
         },
         actions:{
             onValues: 'Value',
-            onActions: 'Action',
+            onResults: 'Action',
             importSymbols: {
                 ifAllOf: ['isParsed', 'nameOfFormula', 'instructions', 'scriptRef']
             },
@@ -163,7 +163,7 @@ const xe = new XE<AP, Actions>({
             }
         }
    },
-   superclass: BeFor
+   superclass: BePute
 });
 
 register(ifWantsToBe, upgrade, tagName);

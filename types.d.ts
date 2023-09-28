@@ -18,7 +18,7 @@ export interface Arg{
     signal?: WeakRef<SignalRefType>,
 }
 
-export interface ForInstruction{
+export interface Instruction{
     args?: Array<Arg>;
     isAction?: boolean,
 }
@@ -30,7 +30,7 @@ export interface ForInstruction{
 export interface AllProps extends EndUserProps{
     isParsed?: boolean;
     formulaEvaluator?: (vals: any) => any;
-    instructions?: Array<ForInstruction>;
+    instructions?: Array<Instruction>;
 }
 
 export type ValueStatement = string;
@@ -47,7 +47,7 @@ export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
 
 export interface Actions{
     onValues(self: this): ProPAP;
-    onActions(self: this): ProPAP;
+    onResults(self: this): ProPAP;
     importSymbols(self: this): ProPAP;
     observe(self: this): Promise<void>;
 }
