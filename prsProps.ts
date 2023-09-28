@@ -5,13 +5,13 @@ import {arr, tryParse} from 'be-enhanced/cpu.js';
 
 const reActionStatement: RegExpOrRegExpExt<ParsedActionStatement>[] = [
     {
-        regExp: new RegExp(String.raw `^triggeredBy(?<dependencies>.*)`),
+        regExp: new RegExp(String.raw `^from(?<dependencies>.*)`),
         defaultVals: {}
     }
 ]
 export function prsAction(self: AP) : PAP {
     //be careful about making this asynchronous due to args getting out of sync
-    let {Action, instructions} = self;
+    let {Props: Action, instructions} = self;
     if(instructions === undefined) instructions = [];
     const args: Array<Arg> = [];
     const instruction: Instruction = {

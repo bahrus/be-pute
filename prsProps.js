@@ -1,13 +1,13 @@
 import { tryParse } from 'be-enhanced/cpu.js';
 const reActionStatement = [
     {
-        regExp: new RegExp(String.raw `^triggeredBy(?<dependencies>.*)`),
+        regExp: new RegExp(String.raw `^from(?<dependencies>.*)`),
         defaultVals: {}
     }
 ];
 export function prsAction(self) {
     //be careful about making this asynchronous due to args getting out of sync
-    let { Action, instructions } = self;
+    let { Props: Action, instructions } = self;
     if (instructions === undefined)
         instructions = [];
     const args = [];

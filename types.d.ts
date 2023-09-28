@@ -7,7 +7,7 @@ import {ElTypes, SignalRefType} from 'be-linked/types';
 
 export interface EndUserProps extends IBE{
     Value?: Array<ValueStatement>;
-    Action?: Array<ActionStatement>;
+    Props?: Array<PropsStatement>;
     scriptRef?: Target,
     nameOfExport?: string,
 }
@@ -35,7 +35,7 @@ export interface AllProps extends EndUserProps{
 
 export type ValueStatement = string;
 
-export type ActionStatement = string;
+export type PropsStatement = string;
 
 export type AP = AllProps;
 
@@ -47,7 +47,7 @@ export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
 
 export interface Actions{
     onValues(self: this): ProPAP;
-    onResults(self: this): ProPAP;
+    onProps(self: this): ProPAP;
     importSymbols(self: this): ProPAP;
     observe(self: this): Promise<void>;
 }

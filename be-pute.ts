@@ -35,11 +35,11 @@ export class BePute extends BE<AP, Actions> implements Actions{
         return parsed as PAP;
     }
 
-    async onResults(self: this){
+    async onProps(self: this){
         const {parsedFrom} = self;
         let parsed = prsOnActionsCache.get(parsedFrom);
         if(parsed === undefined){
-            const {prsAction} = await import('./prsResult.js');
+            const {prsAction} = await import('./prsProps.js');
             parsed = prsAction(self);
             prsOnActionsCache.set(parsedFrom, parsed);
         }
@@ -170,8 +170,8 @@ const xe = new XE<AP, Actions>({
             onValues: {
                 ifAllOf: ['isParsed', 'Value'],
             },
-            onResults: {
-                ifAllOf: ['isParsed', 'Action']
+            onProps: {
+                ifAllOf: ['isParsed', 'Props']
             },
             importSymbols: {
                 ifAllOf: ['isParsed', 'nameOfExport', 'instructions', 'scriptRef']

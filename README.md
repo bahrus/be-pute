@@ -93,7 +93,7 @@ Values coming from host (/)
             prop2: liberated.blink(),
         })
     </script>
-    <any-element itemprop=isInNirvana be-pute='Result from $isHappy, @isWealthy, #liberated.'></any-element>
+    <any-element itemprop=isInNirvana be-pute='Props from $isHappy, @isWealthy, #liberated.'></any-element>
 </form>
 ```
 
