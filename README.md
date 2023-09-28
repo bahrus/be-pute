@@ -1,15 +1,15 @@
-# be-pute [TODO]
+# be-pute
 
 
-<!-- [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/be-switched) 
-[![Playwright Tests](https://github.com/bahrus/be-for/actions/workflows/CI.yml/badge.svg)](https://github.com/bahrus/be-for/actions/workflows/CI.yml) 
-[![NPM version](https://badge.fury.io/js/be-for.png)](http://badge.fury.io/js/be-for)
-[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-for?style=for-the-badge)](https://bundlephobia.com/result?p=be-for)
-<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-for?compression=gzip"> -->
+<!-- [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/be-switched)  -->
+[![Playwright Tests](https://github.com/bahrus/be-pute/actions/workflows/CI.yml/badge.svg)](https://github.com/bahrus/be-pute/actions/workflows/CI.yml) 
+[![NPM version](https://badge.fury.io/js/be-pute.png)](http://badge.fury.io/js/be-pute)
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-pute?style=for-the-badge)](https://bundlephobia.com/result?p=be-pute)
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-pute?compression=gzip">
 
 Compute values from other HTML signals via local script tags.
 
-## Example 1a [TODO]
+## Example 1a
 
 ```html
 <div itemscope>
@@ -26,7 +26,7 @@ Compute values from other HTML signals via local script tags.
 ```
 
 
-## Example 1b [TODO]
+## Example 1b
 
 ```html
 <form itemscope>
@@ -42,7 +42,7 @@ Compute values from other HTML signals via local script tags.
 </form>
 ```
 
-## Example 1c [TODO]
+## Example 1c
 
 Add more context to the scripting
 
@@ -63,7 +63,7 @@ Add more context to the scripting
 </form>
 ```
 
-## Example 1d [TODO]
+## Example 1d
 
 Values coming from host (/)
 
@@ -78,7 +78,7 @@ Values coming from host (/)
 </my-custom-element>
 ```
 
-## Example 2a [TODO]
+## Example 2a
 
 ```html
 <form itemscope>
@@ -118,13 +118,13 @@ Any web server that can serve static files will do, but...
 ## Using from ESM Module:
 
 ```JavaScript
-import 'be-for/be-for.js';
+import 'be-pute/be-pute.js';
 ```
 
 ## Using from CDN:
 
 ```html
 <script type=module crossorigin=anonymous>
-    import 'https://esm.run/be-for';
+    import 'https://esm.run/be-pute';
 </script>
 ```
