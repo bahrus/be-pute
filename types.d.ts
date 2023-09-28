@@ -9,7 +9,7 @@ export interface EndUserProps extends IBE{
     Value?: Array<ValueStatement>;
     Action?: Array<ActionStatement>;
     scriptRef?: Target,
-    nameOfFormula?: string,
+    nameOfExport?: string,
 }
 
 export interface Arg{
@@ -29,7 +29,7 @@ export interface Instruction{
 
 export interface AllProps extends EndUserProps{
     isParsed?: boolean;
-    formulaEvaluator?: (vals: any) => any;
+    evaluate?: (vals: any) => any;
     instructions?: Array<Instruction>;
 }
 

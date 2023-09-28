@@ -10,31 +10,45 @@ import {setItemProp} from 'be-linked/setItemProp.js';
 import {getSignalVal} from 'be-linked/getSignalVal.js';
 import {Actions as BPActions} from 'be-propagating/types';
 
+const cache = new Map<string, {}>();
+const prsOnValuesCache = new Map<string, {}>();
+const prsOnActionsCache = new Map<string, {}>();
 export class BePute extends BE<AP, Actions> implements Actions{
     static override get beConfig(){
         return {
             parse: true,
+            cache,
             parseAndCamelize: true,
             isParsedProp: 'isParsed'
         } as BEConfig
     }
 
     async onValues(self: this) {
-        //TODO:  cache like be-switched
-        const {prsValue} = await import('./prsValue.js');
-        const parsed = prsValue(self);
+        const {parsedFrom} = self;
+        let parsed = prsOnValuesCache.get(parsedFrom);
+        if(parsed === undefined){
+            const {prsValue} = await import('./prsValue.js');
+            parsed = prsValue(self);
+            prsOnValuesCache.set(parsedFrom, parsed);
+        }
+        
         return parsed as PAP;
     }
 
     async onResults(self: this){
-        const {prsAction} = await import('./prsResult.js');
-        const parsed = prsAction(self);
+        const {parsedFrom} = self;
+        let parsed = prsOnActionsCache.get(parsedFrom);
+        if(parsed === undefined){
+            const {prsAction} = await import('./prsResult.js');
+            parsed = prsAction(self);
+            prsOnActionsCache.set(parsedFrom, parsed);
+        }
         return parsed as PAP;
     }
 
     async importSymbols(self: this): ProPAP {
         import('be-exportable/be-exportable.js');
-        const {scriptRef, enhancedElement, nameOfFormula} = self;
+        const {scriptRef, enhancedElement, nameOfExport} = self;
         const {findRealm} = await import('trans-render/lib/findRealm.js');
         const target = await findRealm(enhancedElement, scriptRef!) as HTMLScriptElement | null;
         if(target === null) throw 404;
@@ -44,7 +58,7 @@ export class BePute extends BE<AP, Actions> implements Actions{
         }
         const exportable = await (<any>target).beEnhanced.whenResolved('be-exportable') as BeExportableAllProps;
         return {
-            formulaEvaluator: exportable.exports[nameOfFormula!]
+            evaluate: exportable.exports[nameOfExport!]
         }
     }
 
@@ -109,7 +123,7 @@ export class BePute extends BE<AP, Actions> implements Actions{
 }
 
 async function evalFormula(self: AP){
-    const {formulaEvaluator, instructions, enhancedElement} = self;
+    const {evaluate, instructions, enhancedElement} = self;
     const inputObj: {[key: string]:  any} = {};
     const [firstInstruction] = instructions!;
     const args = firstInstruction.args;
@@ -123,7 +137,7 @@ async function evalFormula(self: AP){
         const val = getSignalVal(ref);
         inputObj[prop!] = val;
     }
-    const result = await formulaEvaluator!(inputObj);
+    const result = await evaluate!(inputObj);
     const value = result?.value === undefined ? result : result.value;
     if(firstInstruction.isAction){
         Object.assign(enhancedElement, value);
@@ -147,19 +161,23 @@ const xe = new XE<AP, Actions>({
         propDefaults:{
             ...propDefaults,
             scriptRef: 'previousElementSibling',
-            nameOfFormula: 'formula'
+            nameOfExport: 'expr'
         },
         propInfo: {
             ...propInfo
         },
         actions:{
-            onValues: 'Value',
-            onResults: 'Action',
+            onValues: {
+                ifAllOf: ['isParsed', 'Value'],
+            },
+            onResults: {
+                ifAllOf: ['isParsed', 'Action']
+            },
             importSymbols: {
-                ifAllOf: ['isParsed', 'nameOfFormula', 'instructions', 'scriptRef']
+                ifAllOf: ['isParsed', 'nameOfExport', 'instructions', 'scriptRef']
             },
             observe:{
-                ifAllOf: ['formulaEvaluator', 'instructions']
+                ifAllOf: ['evaluate', 'instructions']
             }
         }
    },

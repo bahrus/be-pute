@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Example 1b</title>
     <script type=importmap>
         {
             "imports": {
@@ -22,16 +22,27 @@
     <form itemscope>
         <link itemprop=isHappy href=https://schema.org/True>
         <input type=checkbox name=isWealthy>
-        <div contenteditable id=liberated>abc</div>
+        <div contenteditable id=liberated>abcdefghijkmnopqrs</div>
         ...
     
         <script nomodule>
             isHappy && !isWealthy && liberated.length > 17
         </script>
-        <link itemprop=isInNirvana be-for='Value based on $isHappy, @isWealthy, #liberated.'>
+        <link id=link itemprop=isInNirvana be-pute='Value from $isHappy, @isWealthy, #liberated.'>
     </form>
+    <div id=target></div>
     <script type=module>
-        import '../be-for.js';
+        import '../be-pute.js';
+    </script>
+    <script>
+        function runTest(){
+            if(link.href === 'https://schema.org/True'){
+                target.setAttribute('mark', 'good');
+            }
+        }
+        setTimeout(() => {
+            runTest();
+        }, 2000);
     </script>
 </body>
 </html>

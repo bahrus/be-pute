@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Example 1c</title>
     <script type=importmap>
         {
             "imports": {
                 "be-enhanced/": "../node_modules/be-enhanced/",
                 "be-exportable/": "../node_modules/be-exportable/",
                 "be-hive/":  "../node_modules/be-hive/",
-                "be-intl/": "../node_modules/be-intl/",
                 "be-linked/": "../node_modules/be-linked/",
-                "be-propagating/": "../node_modules/be-propagating/",
                 "be-value-added/": "../node_modules/be-value-added/",
                 "trans-render/": "../node_modules/trans-render/",
                 "xtal-element/": "../node_modules/xtal-element/"
@@ -22,19 +20,32 @@
 </head>
 <body>
     <form itemscope>
-        <div contenteditable id=liberated>abc</div>
+        <link itemprop=isHappy href=https://schema.org/True>
+        <input type=checkbox name=isWealthy>
+        <div contenteditable id=liberated>abcdefghijklmnopqrs</div>
         ...
     
         <script nomodule>
-            ({
-                numValue: liberated.length
-            })
+            ({isHappy, isWealthy, liberated}) => {
+                console.log({isHappy, isWealthy, liberated});
+                return isHappy && !isWealthy && liberated.length > 17;
+            }
         </script>
-        <my-custom-element enh-by-be-for='Action triggered by #liberated.'></my-custom-element>
+        <link id=link itemprop=isInNirvana be-pute='Value from $isHappy, @isWealthy, #liberated.'>
     </form>
+    <div id=target></div>
     <script type=module>
-        import '../be-for.js';
-        import '../my-custom-element/my-custom-element.js';
+        import '../be-pute.js';
+    </script>
+    <script>
+        function runTest(){
+            if(link.href === 'https://schema.org/True'){
+                target.setAttribute('mark', 'good');
+            }
+        }
+        setTimeout(() => {
+            runTest();
+        }, 2000);
     </script>
 </body>
 </html>

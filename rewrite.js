@@ -1,4 +1,4 @@
-export function rewrite({ enhancedElement, nameOfFormula, instructions }, scriptEl) {
+export function rewrite({ enhancedElement, nameOfExport: nameOfFormula, instructions }, scriptEl) {
     const inner = scriptEl.innerHTML.trim();
     const args = instructions[0].args;
     if (inner.indexOf('=>') === -1) {
