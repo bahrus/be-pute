@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example 2a</title>
+    <title>Example 1e</title>
     <script type=importmap>
         {
             "imports": {
@@ -22,15 +22,13 @@
 </head>
 <body>
     <form itemscope>
-        <div contenteditable id=liberated>abc</div>
-        ...
+        <my-custom-element -num-value></my-custom-element>
+        
     
         <script nomodule>
-            ({
-                numValue: liberated.length
-            })
+            numValue ** 3
         </script>
-        <my-custom-element enh-by-be-pute='Props from #liberated.'></my-custom-element>
+        <meta itemprop=square be-pute='Value from -num-value.'>
     </form>
     <script type=module>
         import '../be-pute.js';

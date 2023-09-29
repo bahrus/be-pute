@@ -14,6 +14,7 @@ export interface EndUserProps extends IBE{
 
 export interface Arg{
     prop?: string,
+    attr?: string,
     type?: ElTypes,
     signal?: WeakRef<SignalRefType>,
 }
