@@ -106,7 +106,9 @@ export class BePute extends BE<AP, Actions> implements Actions{
                     const host = await findRealm(enhancedElement, 'hostish');
                     if(!host) throw 404;
                     import('be-propagating/be-propagating.js');
+                    //console.log('enhance with be-propagating');
                     const bePropagating = await (<any>host).beEnhanced.whenResolved('be-propagating') as BPActions;
+                    //console.log('attached be-propagating');
                     const signal = await bePropagating.getSignal(prop!);
                     arg.signal = new WeakRef(signal);
                     signal.addEventListener('value-changed', e => {
@@ -117,7 +119,16 @@ export class BePute extends BE<AP, Actions> implements Actions{
                 case '-': {
                     const el = await findRealm(enhancedElement, ['upSearch', `[${attr!}]`]);
                     if(!el) throw 404;
-                    debugger;
+                    import('be-propagating/be-propagating.js');
+                    //console.log('enhance with be-propagating');
+                    const bePropagating = await (<any>el).beEnhanced.whenResolved('be-propagating') as BPActions;
+                    //console.log('attached be-propagating');
+                    const signal = await bePropagating.getSignal(prop!);
+                    arg.signal = new WeakRef(signal);
+                    signal.addEventListener('value-changed', e => {
+                        evalFormula(self);
+                    });
+                    break;
                 }
             }
         }
@@ -144,6 +155,9 @@ async function evalFormula(self: AP){
     }
     const result = await evaluate!(inputObj);
     const value = result?.value === undefined ? result : result.value;
+    // if(enhancedElement.localName === 'meta'){
+    //     debugger;
+    // }
     if(firstInstruction.isAction){
         Object.assign(enhancedElement, value);
     }else{
