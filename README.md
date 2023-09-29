@@ -78,6 +78,22 @@ Values coming from host (/)
 </my-custom-element>
 ```
 
+## Example 1e
+
+Value coming from marker
+
+```html
+<form itemscope>
+    <my-custom-element -num-value></my-custom-element>
+    
+
+    <script nomodule>
+        numValue ** 2
+    </script>
+    <meta itemprop=square be-pute='Value from -num-value.'>
+</form>
+```
+
 ## Example 2a
 
 ```html
