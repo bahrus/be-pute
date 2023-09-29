@@ -66,7 +66,7 @@ export class BePute extends BE<AP, Actions> implements Actions{
         const {instructions, enhancedElement} = self;
         const args = instructions![0].args;
         for(const arg of args!){
-            const {prop, type} = arg;
+            const {prop, type, attr} = arg;
             switch(type){
                 //TODO:  common code with be-switched -- move to be-linked
                 case '$':{
@@ -113,6 +113,11 @@ export class BePute extends BE<AP, Actions> implements Actions{
                         evalFormula(self);
                     });
                     break;
+                }
+                case '-': {
+                    const el = await findRealm(enhancedElement, ['upSearch', `[${attr!}]`]);
+                    if(!el) throw 404;
+                    debugger;
                 }
             }
         }

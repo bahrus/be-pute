@@ -2,6 +2,7 @@ import {AP, ProPAP, PAP, ParsedValueStatement, Arg, Instruction} from './types';
 import {ElTypes} from 'be-linked/types';
 import {RegExpOrRegExpExt} from 'be-enhanced/types';
 import {arr, tryParse} from 'be-enhanced/cpu.js';
+import {lispToCamel} from 'trans-render/lib/lispToCamel.js';
 
 const reValueStatement: RegExpOrRegExpExt<ParsedValueStatement>[] = [
     {
@@ -25,10 +26,16 @@ export function prsValue(self: AP) : PAP {
     const splitDependencies = dependencies!.split(',').map(x => x.trim());
     for(const dependency of splitDependencies){
         const type = dependency[0] as ElTypes;
-        const prop = dependency.substring(1);
+        let prop = dependency.substring(1);
+        let attr: string | undefined = undefined;
+        if(type === '-'){
+            attr = '-' + prop;
+            prop = lispToCamel(prop);
+        }
         const arg: Arg = {
             type,
-            prop
+            prop,
+            attr,
         };
         args.push(arg);
     }

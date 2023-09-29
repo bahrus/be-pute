@@ -1,4 +1,5 @@
 import { tryParse } from 'be-enhanced/cpu.js';
+import { lispToCamel } from 'trans-render/lib/lispToCamel.js';
 const reValueStatement = [
     {
         regExp: new RegExp(String.raw `^from(?<dependencies>.*)`),
@@ -23,10 +24,16 @@ export function prsValue(self) {
     const splitDependencies = dependencies.split(',').map(x => x.trim());
     for (const dependency of splitDependencies) {
         const type = dependency[0];
-        const prop = dependency.substring(1);
+        let prop = dependency.substring(1);
+        let attr = undefined;
+        if (type === '-') {
+            attr = '-' + prop;
+            prop = lispToCamel(prop);
+        }
         const arg = {
             type,
-            prop
+            prop,
+            attr,
         };
         args.push(arg);
     }
