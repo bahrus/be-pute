@@ -116,7 +116,7 @@ export class BePute extends BE {
                     if (!el)
                         throw 404;
                     import('be-propagating/be-propagating.js');
-                    //console.log('enhance with be-propagating');
+                    //console.log('enhance with be-propagating', el);
                     const bePropagating = await el.beEnhanced.whenResolved('be-propagating');
                     //console.log('attached be-propagating');
                     const signal = await bePropagating.getSignal(prop);

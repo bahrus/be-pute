@@ -120,7 +120,7 @@ export class BePute extends BE<AP, Actions> implements Actions{
                     const el = await findRealm(enhancedElement, ['upSearch', `[${attr!}]`]);
                     if(!el) throw 404;
                     import('be-propagating/be-propagating.js');
-                    //console.log('enhance with be-propagating');
+                    //console.log('enhance with be-propagating', el);
                     const bePropagating = await (<any>el).beEnhanced.whenResolved('be-propagating') as BPActions;
                     //console.log('attached be-propagating');
                     const signal = await bePropagating.getSignal(prop!);

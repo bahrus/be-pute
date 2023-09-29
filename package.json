@@ -23,11 +23,11 @@
     "types.d.ts"
   ],
   "dependencies": {
-    "be-enhanced": "0.0.52",
+    "be-enhanced": "0.0.53",
     "be-exportable": "0.0.93",
     "be-hive": "0.0.123",
-    "be-linked": "0.0.48",
-    "be-propagating": "0.0.25",
+    "be-linked": "0.0.50",
+    "be-propagating": "0.0.26",
     "be-value-added": "0.0.7",
     "trans-render": "0.0.706",
     "xtal-element": "0.0.579"
