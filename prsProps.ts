@@ -8,7 +8,8 @@ const reActionStatement: RegExpOrRegExpExt<ParsedActionStatement>[] = [
         regExp: new RegExp(String.raw `^from(?<dependencies>.*)`),
         defaultVals: {}
     }
-]
+];
+
 export function prsAction(self: AP) : PAP {
     //be careful about making this asynchronous due to args getting out of sync
     let {Props: Action, instructions} = self;
